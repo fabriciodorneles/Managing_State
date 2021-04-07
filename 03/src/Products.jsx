@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import PageNotFound from "./PageNotFound";
 import useFetch from "./services/useFetch";
 import Spinner from "./Spinner";
@@ -14,11 +15,11 @@ export default function Products() {
   function renderProduct(p) {
     return (
       <div key={p.id} className="product">
-        <a href="/">
+        <Link to={`/${category}/${p.id}`}>
           <img src={`/images/${p.image}`} alt={p.name} />
           <h3>{p.name}</h3>
           <p>${p.price}</p>
-        </a>
+        </Link>
       </div>
     );
   }
@@ -41,7 +42,6 @@ export default function Products() {
           id="size"
           value={size}
           onChange={(e) => {
-            debugger;
             setSize(e.target.value);
           }}
         >
