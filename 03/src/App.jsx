@@ -6,10 +6,15 @@ import Detail from "./Detail";
 import Footer from "./Footer";
 import Header from "./Header";
 import Products from "./Products";
-import useFetch from "./services/useFetch";
-import Spinner from "./Spinner";
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+
+  function addToCart(id, sku) {
+    setCart((items) => {
+      const itemInCart = items.find((i) => i.sku === sku);
+    });
+  }
   return (
     <>
       <div className="content">
@@ -18,7 +23,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<h1>Welcome to Carved Rock Fitness</h1>} />
             <Route path="/:category" element={<Products />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/:category/:id" element={<Detail />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </main>
