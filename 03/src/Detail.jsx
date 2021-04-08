@@ -4,7 +4,7 @@ import PageNotFound from "./PageNotFound";
 import useFetch from "./services/useFetch";
 import Spinner from "./Spinner";
 
-export default function Detail() {
+export default function Detail(props) {
   const [sku, setSku] = useState("");
   const { id } = useParams();
   const { data: product, loading, error } = useFetch("products/" + id);
@@ -27,9 +27,9 @@ export default function Detail() {
         }}
       >
         <option value="">What size?</option>
-        {product.skus.map((sku) => (
-          <option key={sku.size} value={sku.size}>
-            {sku.size}
+        {product.skus.map((s) => (
+          <option key={s.sku} value={s.sku}>
+            {s.size}
           </option>
         ))}
       </select>
@@ -37,7 +37,10 @@ export default function Detail() {
         <button
           disabled={!sku}
           className="btn btn-primary"
-          onClick={() => navigate("/cart")}
+          onClick={() => {
+            props.addToCart(id, sku);
+            navigate("/cart");
+          }}
         >
           Add to cart
         </button>
