@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Cart from "./Cart";
+import Checkout from "./Checkout";
 import Detail from "./Detail";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -58,6 +59,7 @@ export default function App() {
               path="/cart"
               element={<Cart cart={cart} updateQuantity={updateQuantity} />}
             />
+            <Route path="/checkout" element={<Checkout cart={cart} />} />
           </Routes>
         </main>
       </div>
